@@ -1,5 +1,6 @@
 from __future__ import annotations
-from cell_state import EState
+from classes.cell_state import EState
+
 
 class Cell:
     def __init__(self, state: EState, pos_x, pos_y) -> None:
@@ -39,17 +40,23 @@ class Cell:
         for neighbor in neighbors:
             if neighbor.state == EState.ALIVE:
                 alive_neighbors += 1
+        print(f'alive neighbors: {alive_neighbors}')
+        print(f'current state: {self._state}')
 
         if self._state == EState.ALIVE:
+            print('alive1')
             if alive_neighbors == 0 or alive_neighbors == 1:
                 self._state = EState.DEAD
             elif alive_neighbors == 2 or alive_neighbors == 3:
+                print('alive2')
                 self._state = EState.ALIVE
             else:
                 self._state = EState.DEAD
         else:
             if alive_neighbors == 3:
                 self._state = EState.ALIVE
+
+        print(f'new state: {self._state}')
 
     def __str__(self):
         return str(self._state.value)
